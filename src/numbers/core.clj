@@ -4,14 +4,17 @@
    [clojure.string :as str]
    [clojure.java.io :refer [resource reader]]))
 
+(defn split-to-integers
+  "returns a list of integers from a comma separated line"
+  [line]
+  (map #(Integer/parseInt %) (str/split line #",")))
+
 (defn read-file
-  "reads a file of the specified format in the project spec"
+  "returns a lazy-seq of a file in the format specified in the project spec"
   [filename]
-  (let [rdr (reader (resource filename))]
-    (map (fn [line]
-           (map #(Integer/parseInt %)  (str/split line #",")))
-         (rest (line-seq rdr)) ;; eliminate header row
-         )))
+  (let [rdr (reader (resource filename))
+        file (rest (line-seq rdr))]
+    (map split-to-integers file)))
 
 (defonce examples
   [{:label nil
