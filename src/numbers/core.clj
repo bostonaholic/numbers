@@ -42,19 +42,29 @@
   ([knowns unknown]
      (closest-neighbor (rest knowns)
                        unknown
-                       (dist (first knowns) unknown)
+                       (dist (:pixels (first knowns)) (:pixels unknown))
                        (first knowns)))
   ([knowns unknown best-score best-match]
      (if (seq knowns)
-       (let [score (dist (first knowns) unknown)]
+       (let [score (dist (:pixels (first knowns)) (:pixels unknown))]
          (if (< score best-score)
            (recur (rest knowns) unknown score (first knowns))
            (recur (rest knowns) unknown best-score best-match)))
        {:best-score best-score
         :best-match best-match})))
 
+(defn train
+  ""
+  [filename]
+  (map (partial closest-neighbor examples) (take 3 (parse-file filename))))
+
+(comment
+  (closest-neighbor examples (first (parse-file "trainingset.csv")))
+  (map (partial closest-neighbor examples) (take 100 (parse-file filename)))
+  )
+
 (defn -main [& args]
-  (map (partial closest-neighbor examples)))
+  (train "trainingset.csv"))
 
 (defn accuracy
   "calculates accuracy metrics for the closest-neighbor function"
@@ -65,4 +75,4 @@
 (defn performance
   "calculates performance metrics for the closest-neighbor function"
   []
-  (time (closest-neighbor [] [])))
+  {:time (time (closest-neighbor [] []))})
