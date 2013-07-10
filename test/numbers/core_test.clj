@@ -15,7 +15,10 @@
     (is (= 1 (square 1)))
     (is (= 16 (square 4)))))
 
-(deftest cubed-test)
+(deftest cubed-test
+  (testing "cubing a number"
+    (is (= 1 (cubed 1)))
+    (is (= 27 (cubed 3)))))
 
 (deftest square-of-difference-test
   (testing "squares the difference of two numbers"
