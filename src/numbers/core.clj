@@ -17,8 +17,10 @@
     (map split-to-integers file)))
 
 (defonce examples
-  [{:label nil
-    :pixels []}])
+  (let [all (read-file "validationset.csv")]
+    (map (fn [line]
+           {:label (first line)
+            :pixels (rest line)}) all)))
 
 (defn square [^Integer n] (* n n))
 (defn cubed [^Integer n] (* n n n))
