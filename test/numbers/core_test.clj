@@ -31,6 +31,9 @@
   (testing "squares the difference of two numbers"
     (is (= 16 (square-of-difference 9 5)))))
 
-(deftest euclidean-distance-test)
+(deftest euclidean-distance-test
+  (testing "calculates the euclidean distance between two vectors"
+    (is (= 0 (euclidean-distance [0 0] [0 0])))
+    (is (= 13 (euclidean-distance [4 2] [6 5])))))
 
 (deftest closest-neighbor-test)
