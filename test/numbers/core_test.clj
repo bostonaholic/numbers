@@ -36,4 +36,8 @@
     (is (= 0 (euclidean-distance [0 0] [0 0])))
     (is (= 13 (euclidean-distance [4 2] [6 5])))))
 
-(deftest closest-neighbor-test)
+(deftest closest-neighbor-test
+  (testing "returns the data structure which represents the closest neighbor"
+    (let [knowns []
+          unknown {:label 1
+                   :pixels []}])))
