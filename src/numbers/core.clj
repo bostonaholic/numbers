@@ -12,12 +12,15 @@
 (defn read-file
   "returns a lazy-seq of a file in the format specified in the project spec"
   [filename]
-  (let [rdr (reader (resource filename))
-        file (rest (line-seq rdr))]
-    (map split-to-integers file)))
+  (line-seq (reader (resource filename))))
+
+(defn parse-file
+  ""
+  [filename]
+  (map split-to-integers (rest (read-file filename))))
 
 (defonce examples
-  (let [all (read-file "validationset.csv")]
+  (let [all (first (parse-file "validationset.csv"))]
     (map (fn [line]
            {:label (first line)
             :pixels (rest line)}) all)))
