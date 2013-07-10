@@ -6,9 +6,16 @@
   (testing "spliting comma separated strings into integers"
     (is (= '(1 2 3) (split-to-integers "1,2,3")))))
 
-(deftest read-file-test)
+(deftest read-file-test
+  (testing "able to read a file from disk"
+    (let [file (read-file "test/testfile.csv")]
+      (is (not (empty? file))))))
 
-(deftest parse-file-test)
+(deftest parse-file-test
+  (testing "parse a file into the integer format"
+    (let [parsed-file (parse-file "test/testfile.csv")]
+      (is (= 1 (count parsed-file)))
+      (is (= '(1 2 3 4 5 6 7 8 9 10) (first parsed-file))))))
 
 (deftest square-test
   (testing "squaring a number"
