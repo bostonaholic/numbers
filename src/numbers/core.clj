@@ -24,18 +24,15 @@
 (defn closest-neighbor
   "classifier"
   ([knowns unknown]
-     (closest-neighbor (rest knowns) ;; TODO: should this just be knowns?
-                       unknown
-                       (dist (:pixels (first knowns)) (:pixels unknown))
-                       (first knowns)))
+     (closest-neighbor knowns unknown Integer/MAX_VALUE {}))
   ([knowns unknown best-score best-match]
      (if (seq knowns)
        (let [score (dist (:pixels (first knowns)) (:pixels unknown))]
          (if (< score best-score)
            (recur (rest knowns) unknown score (first knowns))
            (recur (rest knowns) unknown best-score best-match)))
-       {:best-score 0
-        :best-match {}})))
+       {:best-score best-score
+        :best-match best-match})))
 
 (defn train
   ""
