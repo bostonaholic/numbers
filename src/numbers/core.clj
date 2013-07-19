@@ -3,7 +3,7 @@
   (:require
    [numbers.parser :refer [parse-file]]))
 
-(def examples (parse-file "validationset.csv")) ;; 500 examples
+(def validation-set (parse-file "validationset.csv")) ;; 500 examples
 (def training-set (parse-file "trainingset.csv")) ;; 5,000 examples
 
 (defn square [^Integer n] (* n n))
@@ -40,11 +40,12 @@
 (defn train
   ""
   [filename]
-  (map (partial closest-neighbor (first examples)) (take 3 (parse-file filename))))
+  (let [examples (first validation-set)]
+    (map (partial closest-neighbor examples) (take 3 (parse-file filename)))))
 
 (comment
   (closest-neighbor examples (first training-set))
-  (map (partial closest-neighbor examples) (take 100 (parse-file filename)))
+  (map (partial closest-neighbor (first validation-set)) (take 100 training-set))
   )
 
 (defn -main [& args]
