@@ -1,44 +1,28 @@
 ;; TODO: map->pmap
 (ns numbers.core
   (:require
-   [clojure.string :as str]
-   [clojure.java.io :refer [resource reader]]))
+   [numbers.parser :refer [parse-file]]))
 
-(defn split-to-integers
-  "returns a list of integers from a comma separated line"
-  [line]
-  (map #(Integer/parseInt %) (str/split line #",")))
-
-(defn read-file
-  "returns a lazy-seq of a file in the format specified in the project spec"
-  [filename]
-  (line-seq (reader (resource filename))))
-
-(defn parse-file
-  ""
-  [filename]
-  (map split-to-integers (rest (read-file filename))))
-
-(defonce examples
-  (let [all (first (parse-file "validationset.csv"))]
-    (map (fn [line]
-           {:label (first line)
-            :pixels (rest line)}) all)))
+(def examples (parse-file "validationset.csv")) ;; 500 examples
+(def training-set (parse-file "trainingset.csv")) ;; 5,000 examples
 
 (defn square [^Integer n] (* n n))
 (defn cubed [^Integer n] (* n n n))
-
 (defn square-of-difference [x y] (square (- x y)))
 
+(defn square-of-differences [x y]
+  (map square-of-difference x y))
+
 (defn euclidean-distance
-  "calculates the Euclidean Distance between two vectors"
+  "calculates the Euclidean Distance between two vectors
+   DIST = (X1-Y1)^2 + (X2-Y2)^2 + ... + (Xn-Yn)^2"
   [x y]
-  (reduce + (map square-of-difference x y)))
+  (reduce + (square-of-differences x y)))
 
 (defn dist [x y] (euclidean-distance x y))
 
 (defn closest-neighbor
-  ""
+  "classifier"
   ([knowns unknown]
      (closest-neighbor (rest knowns)
                        unknown
@@ -56,10 +40,10 @@
 (defn train
   ""
   [filename]
-  (map (partial closest-neighbor examples) (take 3 (parse-file filename))))
+  (map (partial closest-neighbor (first examples)) (take 3 (parse-file filename))))
 
 (comment
-  (closest-neighbor examples (first (parse-file "trainingset.csv")))
+  (closest-neighbor examples (first training-set))
   (map (partial closest-neighbor examples) (take 100 (parse-file filename)))
   )
 
