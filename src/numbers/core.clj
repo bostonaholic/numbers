@@ -24,7 +24,7 @@
 (defn closest-neighbor
   "classifier"
   ([knowns unknown]
-     (closest-neighbor (rest knowns)
+     (closest-neighbor (rest knowns) ;; TODO: should this just be knowns?
                        unknown
                        (dist (:pixels (first knowns)) (:pixels unknown))
                        (first knowns)))
@@ -34,8 +34,8 @@
          (if (< score best-score)
            (recur (rest knowns) unknown score (first knowns))
            (recur (rest knowns) unknown best-score best-match)))
-       {:best-score best-score
-        :best-match best-match})))
+       {:best-score 0
+        :best-match {}})))
 
 (defn train
   ""
