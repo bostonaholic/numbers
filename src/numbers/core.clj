@@ -37,12 +37,12 @@
 (defn train
   ""
   [filename]
-  (let [examples (first validation-set)]
+  (let [examples validation-set]
     (map (partial closest-neighbor examples) (take 3 (parse-file filename)))))
 
 (comment
   (closest-neighbor examples (first training-set))
-  (map (partial closest-neighbor (first validation-set)) (take 100 training-set))
+  (map (partial closest-neighbor validation-set) (take 1000 training-set))
   )
 
 (defn -main [& args]
