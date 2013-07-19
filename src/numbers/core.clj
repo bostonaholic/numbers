@@ -1,23 +1,11 @@
 ;; TODO: map->pmap
 (ns numbers.core
   (:require
-   [numbers.parser :refer [parse-file]]))
+   [numbers.parser :refer [parse-file]]
+   [numbers.maths :refer [euclidean-distance]]))
 
 (def validation-set (parse-file "validationset.csv")) ;; 500 examples
 (def training-set (parse-file "trainingset.csv")) ;; 5,000 examples
-
-(defn square [^Integer n] (* n n))
-(defn cubed [^Integer n] (* n n n))
-(defn square-of-difference [x y] (square (- x y)))
-
-(defn square-of-differences [x y]
-  (map square-of-difference x y))
-
-(defn euclidean-distance
-  "calculates the Euclidean Distance between two vectors
-   DIST = (X1-Y1)^2 + (X2-Y2)^2 + ... + (Xn-Yn)^2"
-  [x y]
-  (reduce + (square-of-differences x y)))
 
 (defn dist [x y] (euclidean-distance x y))
 
