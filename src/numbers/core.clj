@@ -40,14 +40,6 @@
   (let [examples validation-set]
     (map (partial closest-neighbor examples) (take 3 (parse-file filename)))))
 
-(comment
-  (closest-neighbor examples (first training-set))
-  (map (partial closest-neighbor validation-set) (take 1000 training-set))
-  )
-
-(defn -main [& args]
-  (train "trainingset.csv"))
-
 (defn accuracy
   "calculates accuracy metrics for the closest-neighbor function"
   []
