@@ -22,7 +22,9 @@
 (defn nth-closest-neighbor
   ""
   [n unknown knowns]
-  (take n (closest-neighbors unknown knowns)))
+  (cond
+   (= 1 n) (first (closest-neighbors unknown knowns))
+   :else (take n (closest-neighbors unknown knowns))))
 
 (defn closest-neighbor
   "a machine learning classifier which identifies the closest neighbor

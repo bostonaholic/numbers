@@ -2,6 +2,14 @@
   (:require [clojure.test :refer :all]
             [numbers.core :refer :all]))
 
+(deftest nth-closest-neighbor-test
+  (testing "getting the first closest neighbor"
+    (let [knowns (list {:label 1 :pixels (list 9 0 9 9 0 9 9 0 9)}
+                       {:label 4 :pixels (list 0 9 0 0 0 0 9 9 0)})
+          unknown (list 6 1 6 6 0 6 6 0 6)]
+      (is (= {:best-score 55 :best-match {:label 1 :pixels '(9 0 9 9 0 9 9 0 9)}}
+             (nth-closest-neighbor 1 unknown knowns))))))
+
 (deftest closest-neighbor-test
   (testing "empty knowns"
     (is (= {:best-score Integer/MAX_VALUE :best-match {}}
