@@ -12,11 +12,23 @@
                        {:label 4 :pixels (list 0 9 0 0 0 0 9 9 0)})
           unknown (list 9 0 9 9 0 9 9 0 9)]
       (is (= {:best-score 0 :best-match {:label 1 :pixels '(9 0 9 9 0 9 9 0 9)}}
-             (closest-neighbor knowns unknown)))))
+             (closest-neighbor unknown knowns)))))
 
   (testing "returns the closest neighbor for a non-exact match"
     (let [knowns (list {:label 1 :pixels (list 9 0 9 9 0 9 9 0 9)}
                        {:label 4 :pixels (list 0 9 0 0 0 0 9 9 0)})
           unknown (list 6 1 6 6 0 6 6 0 6)]
       (is (= {:best-score 55 :best-match {:label 1 :pixels '(9 0 9 9 0 9 9 0 9)}}
-             (closest-neighbor knowns unknown))))))
+             (closest-neighbor unknown knowns))))))
+
+(deftest accuracy-test
+  (testing "all values are 0 initially"
+    (is (= {:total 0 :correct 0 :percentage 0.0}
+           (accuracy '() '()))))
+
+  (testing ""
+    (let [validations (list {:label 1 :pixels (list 6 1 6 6 0 6 6 0 6)})
+          trainers (list {:label 1 :pixels (list 9 0 9 9 0 9 9 0 9)}
+                         {:label 4 :pixels (list 0 9 0 0 0 0 9 9 0)})]
+      (is (= {:total 1 :correct 1 :percentage 1}
+             (accuracy validations trainers))))))
