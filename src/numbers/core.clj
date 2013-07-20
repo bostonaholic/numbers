@@ -24,8 +24,8 @@
 
 (defn correct?
   "returns if the closest neighbor found is the correct label"
-  [test found]
-  (and (= (:label test) (:label (:best-match found)))
+  [observation found]
+  (and (= (:label observation) (:label (:best-match found)))
        (not (nil? (:label (:best-match found))))))
 
 (defn accuracy
