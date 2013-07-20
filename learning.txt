@@ -40,6 +40,11 @@ Simplest thing that could possibly work: 1-Nearest Neighbor ("Closest Neighbor")
   Find the closest example to the Target,
   Return its Label
 
+Another possible solution is: Mode from the K Nearest Neighors
+
+  From the training set,
+  Find the K examples closest to the Target,
+  Return the mode of thier Labels
 
 Suggested plan of attack
 **************************
