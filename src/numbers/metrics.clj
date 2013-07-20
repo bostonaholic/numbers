@@ -24,7 +24,8 @@
            correct (count (filter true? corrects))]
        {:total total
         :correct correct
-        :percentage (float (if (zero? total) 0 (/ correct total)))})))
+        :percentage (float (if (zero? total) 0 (/ correct total)))
+        :trained-on (count trainers)})))
 
 (defn performance
   "calculates performance metrics for the closest-neighbor function"
