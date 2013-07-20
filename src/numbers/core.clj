@@ -6,7 +6,8 @@
 (defn dist [x y] (euclidean-distance x y))
 
 (defn closest-neighbor
-  "classifier"
+  "a machine learning classifier which identifies the closest neighbor
+   based on a distance function."
   ([unknown knowns]
      (closest-neighbor unknown knowns Integer/MAX_VALUE {}))
   ([unknown knowns best-score best-match]
