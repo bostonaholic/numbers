@@ -15,7 +15,7 @@
      (closest-neighbor knowns unknown Integer/MAX_VALUE {}))
   ([knowns unknown best-score best-match]
      (if (and (seq knowns) (not (zero? best-score)))
-       (let [score (dist (:pixels (first knowns)) (:pixels unknown))]
+       (let [score (dist (:pixels (first knowns)) unknown)]
          (if (< score best-score)
            (recur (rest knowns) unknown score (first knowns))
            (recur (rest knowns) unknown best-score best-match)))
