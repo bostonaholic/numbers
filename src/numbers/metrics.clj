@@ -1,11 +1,10 @@
-;; TODO: defonce
 (ns numbers.metrics
   (:require
    [numbers.parser :refer [parse-file]]
    [numbers.core :refer :all]))
 
-(def validation-set (parse-file "validationset.csv")) ;; 500 examples
-(def training-set (parse-file "trainingset.csv")) ;; 5,000 examples
+(defonce validation-set (parse-file "validationset.csv")) ;; 500 examples
+(defonce training-set (parse-file "trainingset.csv")) ;; 5,000 examples
 
 (defn correct?
   "returns if the closest neighbor found is the correct label"
