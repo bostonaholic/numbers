@@ -2,29 +2,29 @@
   (:require [clojure.test :refer :all]
             [numbers.core :refer :all]))
 
-(deftest nth-closest-neighbor-test
-  (testing "getting the first closest neighbor"
+(deftest k-nearest-neighbor-test
+  (testing "getting the first nearest neighbor"
     (let [knowns (list {:label 1 :pixels (list 9 0 9 9 0 9 9 0 9)}
                        {:label 4 :pixels (list 0 9 0 0 0 0 9 9 0)})
           unknown (list 6 1 6 6 0 6 6 0 6)]
       (is (= {:best-score 55 :best-match {:label 1 :pixels '(9 0 9 9 0 9 9 0 9)}}
-             (nth-closest-neighbor 1 unknown knowns))))))
+             (k-nearest-neighbor 1 unknown knowns))))))
 
-(deftest closest-neighbor-test
+(deftest nearest-neighbor-test
   (testing "empty knowns"
     (is (= {:best-score Integer/MAX_VALUE :best-match {}}
-           (closest-neighbor '() '()))))
+           (nearest-neighbor '() '()))))
 
-  (testing "returns the closest neighbor for an exact match"
+  (testing "returns the nearest neighbor for an exact match"
     (let [knowns (list {:label 1 :pixels (list 9 0 9 9 0 9 9 0 9)}
                        {:label 4 :pixels (list 0 9 0 0 0 0 9 9 0)})
           unknown (list 9 0 9 9 0 9 9 0 9)]
       (is (= {:best-score 0 :best-match {:label 1 :pixels '(9 0 9 9 0 9 9 0 9)}}
-             (closest-neighbor unknown knowns)))))
+             (nearest-neighbor unknown knowns)))))
 
-  (testing "returns the closest neighbor for a non-exact match"
+  (testing "returns the nearest neighbor for a non-exact match"
     (let [knowns (list {:label 1 :pixels (list 9 0 9 9 0 9 9 0 9)}
                        {:label 4 :pixels (list 0 9 0 0 0 0 9 9 0)})
           unknown (list 6 1 6 6 0 6 6 0 6)]
       (is (= {:best-score 55 :best-match {:label 1 :pixels '(9 0 9 9 0 9 9 0 9)}}
-             (closest-neighbor unknown knowns))))))
+             (nearest-neighbor unknown knowns))))))

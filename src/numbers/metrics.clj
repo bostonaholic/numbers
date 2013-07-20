@@ -7,19 +7,19 @@
 (defonce training-set (parse-file "trainingset.csv")) ;; 5,000 examples
 
 (defn correct?
-  "returns if the closest neighbor found is the correct label"
+  "returns if the nearest neighbor found is the correct label"
   [observation found]
   (and (= (:label observation) (:label (:best-match found)))
        (not (nil? (:label (:best-match found))))))
 
 (defn accuracy
-  "calculates accuracy metrics for the closest-neighbor function"
+  "calculates accuracy metrics for the nearest-neighbor function"
   ([]
      (accuracy validation-set training-set))
   ([validations trainers]
      (let [total (count validations)
-           closests (map #(closest-neighbor (:pixels %) trainers) validations)
-           corrects (map correct? validations closests)
+           nearests (map #(nearest-neighbor (:pixels %) trainers) validations)
+           corrects (map correct? validations nearests)
            correct (count (filter true? corrects))]
        {:total total
         :correct correct
@@ -41,6 +41,6 @@
     (println (accuracy validation-set training-set))))
 
 (defn performance
-  "calculates performance metrics for the closest-neighbor function"
+  "calculates performance metrics for the nearest-neighbor function"
   []
-  {:time (time (closest-neighbor [] []))})
+  {:time (time (nearest-neighbor [] []))})

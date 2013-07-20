@@ -5,11 +5,11 @@
 
 (defn dist [x y] (euclidean-distance x y))
 
-(defn closest-neighbors
+(defn nearest-neighbors
   "a machine learning classifier which returns a lazy-seq of the
-   closest neighbors sorted by distance."
+   nearest neighbors sorted by distance."
   ([unknown knowns]
-     (closest-neighbors unknown knowns Integer/MAX_VALUE {}))
+     (nearest-neighbors unknown knowns Integer/MAX_VALUE {}))
   ([unknown knowns best-score best-match]
      (if (and (seq knowns) (not (zero? best-score)))
        (let [score (dist (:pixels (first knowns)) unknown)]
@@ -19,15 +19,15 @@
        (list {:best-score best-score
               :best-match best-match}))))
 
-(defn nth-closest-neighbor
+(defn k-nearest-neighbor
   ""
   [n unknown knowns]
   (cond
-   (= 1 n) (first (closest-neighbors unknown knowns))
-   :else (take n (closest-neighbors unknown knowns))))
+   (= 1 n) (first (nearest-neighbors unknown knowns))
+   :else (take n (nearest-neighbors unknown knowns))))
 
-(defn closest-neighbor
-  "a machine learning classifier which identifies the closest neighbor
+(defn nearest-neighbor
+  "a machine learning classifier which identifies the nearest neighbor
    based on a distance function."
   [unknown knowns]
-  (first (closest-neighbors unknown knowns)))
+  (first (nearest-neighbors unknown knowns)))
