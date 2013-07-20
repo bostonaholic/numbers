@@ -2,6 +2,11 @@
   (:require [clojure.test :refer :all]
             [numbers.core :refer :all]))
 
+(deftest sort-by-score-test
+  (testing "returns a sorted collection of maps by the score key"
+    (is (= [{:score 2} {:score 3} {:score 5}]
+           (sort-by-score [{:score 3} {:score 2} {:score 5}])))))
+
 (deftest k-nearest-neighbor-test
   (testing "getting the first nearest neighbor"
     (let [knowns (list {:label 1 :pixels (list 9 0 9 9 0 9 9 0 9)}

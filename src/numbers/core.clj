@@ -5,6 +5,11 @@
 
 (defn dist [x y] (euclidean-distance x y))
 
+(defn sort-by-score
+  "sort a collection of maps by the :score key"
+  [coll]
+  (sort #(< (:score %1) (:score %2)) coll))
+
 (defn nearest-neighbors
   "a machine learning classifier which returns a lazy-seq of the
    nearest neighbors sorted by distance."
