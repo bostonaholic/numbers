@@ -34,11 +34,12 @@
      (accuracy validation-set training-set))
   ([validations trainers]
      (let [total (count validations)
-           closest (closest-neighbor (:pixels (first validations)) trainers)
-           correct (count (filter true? (list (correct? (first validations) closest))))]
+           closests (map #(closest-neighbor (:pixels %) trainers) validations)
+           corrects (map correct? validations closests)
+           correct (count (filter true? corrects))]
        {:total total
         :correct correct
-        :percentage (if (zero? total) 0.0 (/ correct total))})))
+        :percentage (float (if (zero? total) 0 (/ correct total)))})))
 
 (defn performance
   "calculates performance metrics for the closest-neighbor function"
