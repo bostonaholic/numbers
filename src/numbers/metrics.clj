@@ -9,8 +9,8 @@
 (defn correct?
   "returns if the nearest neighbor found is the correct label"
   [observation found]
-  (and (= (:label observation) (:label (:best-match found)))
-       (not (nil? (:label (:best-match found))))))
+  (and (= (:label observation) (:label (:match found)))
+       (not (nil? (:label (:match found))))))
 
 (defn accuracy
   "calculates accuracy metrics for the nearest-neighbor function"

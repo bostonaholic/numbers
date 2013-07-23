@@ -21,8 +21,8 @@
          (if (< score best-score)
            (recur unknown (rest knowns) score (first knowns))
            (recur unknown (rest knowns) best-score best-match)))
-       (list {:best-score best-score
-              :best-match best-match}))))
+       (list {:score best-score
+              :match best-match}))))
 
 (defn k-nearest-neighbor
   ""
