@@ -24,7 +24,7 @@
        (list {:score best-score
               :match best-match}))))
 
-(defn k-nearest-neighbor
+(defn k-nearest-neighbors
   ""
   [n unknown knowns]
   (cond
@@ -35,4 +35,4 @@
   "a machine learning classifier which identifies the nearest neighbor
    based on a distance function."
   [unknown knowns]
-  (first (nearest-neighbors unknown knowns)))
+  (k-nearest-neighbors 1 unknown knowns))
