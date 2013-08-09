@@ -17,7 +17,8 @@
 
   (testing "getting the first two nearest neighbors"
     (let [knowns (list {:label 1 :pixels (list 9 0 9 9 0 9 9 0 9)}
-                       {:label 4 :pixels (list 0 9 0 0 0 0 9 9 0)})
+                       {:label 4 :pixels (list 0 9 0 0 0 0 9 9 0)}
+                       {:label 7 :pixels (list 0 0 0 9 0 9 0 9 9)})
           unknown (list 6 1 6 6 0 6 6 0 6)]
       (is (= clojure.lang.LazySeq (class (k-nearest-neighbors 2 unknown knowns)))))))
 
