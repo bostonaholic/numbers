@@ -26,10 +26,10 @@
 
 (defn k-nearest-neighbors
   ""
-  [n unknown knowns]
+  [k unknown knowns]
   (cond
-   (= 1 n) (first (nearest-neighbors unknown knowns))
-   :else (take n (nearest-neighbors unknown knowns))))
+   (= 1 k) (first (nearest-neighbors unknown knowns))
+   :else (take k (nearest-neighbors unknown knowns))))
 
 (defn nearest-neighbor
   "a machine learning classifier which identifies the nearest neighbor
