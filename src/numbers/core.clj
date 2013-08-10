@@ -11,7 +11,7 @@
   (sort #(< (:score %1) (:score %2)) coll))
 
 (defn nearest-neighbors
-  "a machine learning classifier which returns a lazy-seq of the
+  "a machine learning classifier which returns a seq of the
    nearest neighbors sorted by distance."
   ([unknown knowns]
      (nearest-neighbors unknown knowns Integer/MAX_VALUE {}))
