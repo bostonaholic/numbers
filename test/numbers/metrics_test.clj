@@ -1,5 +1,5 @@
 (ns numbers.metrics-test
-  (:require [clojure.test :refer :all]
+  (:require [clojure.test :refer [deftest testing is]]
             [numbers.metrics :refer :all]))
 
 (deftest accuracy-test

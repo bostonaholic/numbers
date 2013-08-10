@@ -1,5 +1,5 @@
 (ns numbers.parser-test
-  (:require [clojure.test :refer :all]
+  (:require [clojure.test :refer [deftest testing is]]
             [numbers.parser :refer :all]))
 
 (deftest split-to-integers-test

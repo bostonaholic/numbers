@@ -1,5 +1,5 @@
 (ns numbers.core-test
-  (:require [clojure.test :refer :all]
+  (:require [clojure.test :refer [deftest testing is]]
             [numbers.core :refer :all]))
 
 (deftest sort-by-score-test

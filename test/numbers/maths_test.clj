@@ -1,5 +1,5 @@
 (ns numbers.maths-test
-  (:require [clojure.test :refer :all]
+  (:require [clojure.test :refer [deftest testing is]]
             [numbers.maths :refer :all]))
 
 (deftest square-test
