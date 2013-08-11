@@ -22,21 +22,21 @@
           unknown (list 6 1 6 6 0 6 6 0 6)]
       (is (= clojure.lang.LazySeq (class (k-nearest-neighbors 2 unknown knowns)))))))
 
-(deftest nearest-neighbor-test
+(deftest naive-nearest-neighbor-test
   (testing "empty knowns"
     (is (= {:score Integer/MAX_VALUE :match {}}
-           (nearest-neighbor '() '()))))
+           (naive-nearest-neighbor '() '()))))
 
   (testing "returns the nearest neighbor for an exact match"
     (let [knowns (list {:label 1 :pixels (list 9 0 9 9 0 9 9 0 9)}
                        {:label 4 :pixels (list 0 9 0 0 0 0 9 9 0)})
           unknown (list 9 0 9 9 0 9 9 0 9)]
       (is (= {:score 0 :match {:label 1 :pixels '(9 0 9 9 0 9 9 0 9)}}
-             (nearest-neighbor unknown knowns)))))
+             (naive-nearest-neighbor unknown knowns)))))
 
   (testing "returns the nearest neighbor for a non-exact match"
     (let [knowns (list {:label 1 :pixels (list 9 0 9 9 0 9 9 0 9)}
                        {:label 4 :pixels (list 0 9 0 0 0 0 9 9 0)})
           unknown (list 6 1 6 6 0 6 6 0 6)]
       (is (= {:score 55 :match {:label 1 :pixels '(9 0 9 9 0 9 9 0 9)}}
-             (nearest-neighbor unknown knowns))))))
+             (naive-nearest-neighbor unknown knowns))))))

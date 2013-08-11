@@ -31,7 +31,7 @@
    (= 1 k) (first (nearest-neighbors unknown knowns))
    :else (take k (nearest-neighbors unknown knowns))))
 
-(defn nearest-neighbor
+(defn naive-nearest-neighbor
   "a machine learning classifier which identifies the nearest neighbor
    based on a distance function."
   [unknown knowns]
