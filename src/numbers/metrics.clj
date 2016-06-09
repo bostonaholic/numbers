@@ -18,7 +18,7 @@
      (accuracy validation-set training-set))
   ([validations trainers]
      (let [total (count validations)
-           nearests (map #(nearest-neighbor (:pixels %) trainers) validations)
+           nearests (map #(naive-nearest-neighbor (:pixels %) trainers) validations)
            corrects (map correct? validations nearests)
            correct (count (filter true? corrects))]
        {:total total
@@ -43,4 +43,4 @@
 (defn performance
   "calculates performance metrics for the nearest-neighbor function"
   []
-  {:time (time (nearest-neighbor [] []))})
+  {:time (time (naive-nearest-neighbor [] []))})
